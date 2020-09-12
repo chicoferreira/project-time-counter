@@ -1,0 +1,35 @@
+<idea-plugin>
+    <id>com.github.chicoferreira.project-time-counter</id>
+    <name>Project Time Counter</name>
+    <vendor url="https://github.com/chicoferreira">chicoferreira</vendor>
+
+    <description>Simple plugin to count how much time did you spend on a project.</description>
+
+    <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceInterface="com.github.chicoferreira.projecttimecounter.HeartbeatService"
+                            serviceImplementation="com.github.chicoferreira.projecttimecounter.HeartbeatServiceImpl"/>
+        <toolWindow id="Project Time Counter"
+                    anchor="bottom"
+                    factoryClass="com.github.chicoferreira.projecttimecounter.window.PTCToolWindowFactory"/>
+
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+
+
+    <projectListeners>
+        <listener class="com.github.chicoferreira.projecttimecounter.listener.HeartbeatDocumentListener"
+                  topic="com.intellij.openapi.editor.event.DocumentListener"/>
+        <listener class="com.github.chicoferreira.projecttimecounter.listener.HeartbeatEditorMouseListener"
+                  topic="com.intellij.openapi.editor.event.EditorMouseListener"/>
+        <listener class="com.github.chicoferreira.projecttimecounter.listener.HeartbeatVisibleAreaListener"
+                  topic="com.intellij.openapi.editor.event.VisibleAreaListener"/>
+    </projectListeners>
+
+</idea-plugin>
